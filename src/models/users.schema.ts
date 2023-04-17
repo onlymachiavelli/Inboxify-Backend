@@ -24,6 +24,10 @@ class Users extends TypeORM.BaseEntity{
     @TypeORM.Column({nullable : false })
     bday : Date
 
+    //verified 
+    @TypeORM.Column({nullable : false , default : false })
+    verified : boolean
+
     @TypeORM.Column({nullable : true , default : null })
     photo : string 
 

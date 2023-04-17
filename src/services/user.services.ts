@@ -24,6 +24,7 @@ const GetAll = async () =>{
 const GetOne = async (id : number) =>{
 
     return await Users.findOne({
+        select:targetFields,
         where : {
             id : id 
         }
@@ -41,6 +42,18 @@ const Update = async (id : number , datas : any) =>{
     await Users.update(id , datas)
 }
 
+//get by phone or email or username 
+const GetOneBy = async (field : any , value : any) =>{
+
+    return await Users.findOne({
+        select:targetFields, 
+        where : {
+            [field] : value
+        }
+        
+    })
+}
+
 const Delete = async (id : number) =>{
     await Users.delete(id)
 }
@@ -49,6 +62,7 @@ export {
     GetOne,
     Create,
     Update,
-    Delete
-    
+    Delete,
+    GetOneBy
+
 }

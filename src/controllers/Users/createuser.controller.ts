@@ -1,0 +1,40 @@
+import * as EXPRESS from 'express'
+import Users from '../../models/users.schema'
+import * as Services from '../../services/user.services'
+import bcrypt from 'bcrypt'
+import date from 'date-and-time'
+import crypto from 'crypto'
+const createUser : EXPRESS.RequestHandler = async (req, res) =>{
+    const Body : any = req.body
+    const Username : any = await Services.GetOneBy("username", Body.username)
+    const Email : any = await Services.GetOneBy("email",Body.email)
+    const Phone : any = await Services.GetOneBy("phone",Body.phone)
+
+    if (Username || Email  || Phone) {
+        res.status(400).send("Username , Email or Phone already exists")
+        return
+    }
+
+    const user = new Users
+    user.username = Body.username
+    user.fullname = Body.fullname
+    user.email = Body.email
+    user.phone = Body.phone
+    user.bday = Body.bday
+    user.photo = Body.photo
+
+    user.apikey_call_times = 0
+    //user.apikey_expires = date.addDays(new Date(), 1)
+    //user.apikey_last_ip = req.ip
+    //user.apikey_last_used = new Date()
+
+    user.verified = false
+    
+    const saltRound: number = Number(process.env.SALT)
+    user.password = await bcrypt
+      .genSalt(saltRound)
+      .then((s) => bcrypt.hash(Body.password, s))
+    console.log(user)
+}
+
+export default createUser
