@@ -5,8 +5,9 @@ import * as Services from './../../services/user.services'
 const getOne :EXPRESS.RequestHandler = async (req, res) =>{
 
     //get the target value and field . 
-    const target : any = req.params.target
-    const field : any = req.params.field
+    const target : any = req.query.target
+    const field : any = req.query.field
+    console.log(target, field)
 
     //check if the field is valid
     if ((field !== "username" && field !== "email" && field !== "phone") || !target ) {
