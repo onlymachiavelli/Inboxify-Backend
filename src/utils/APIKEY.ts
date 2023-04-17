@@ -18,3 +18,5 @@ const GenerateAPIKey :any = async () =>{
     }
     return apikey
 }
+
+export default GenerateAPIKey

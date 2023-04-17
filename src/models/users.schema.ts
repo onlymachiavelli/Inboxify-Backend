@@ -48,7 +48,11 @@ class Users extends TypeORM.BaseEntity{
     @TypeORM.Column({ default : 0 })
     apikey_call_times : number 
 
-    
+    @TypeORM.Column({ default : null })
+    createdat : Date
+
+    @TypeORM.Column({ default : null })
+    updatedat : Date
 
 
 }
