@@ -4,7 +4,6 @@ const targetFields : any = [
     'fullname',
     'email',
     'phone',
-    'password',
     'bday',
     'photo',
     'apikey',
@@ -17,7 +16,9 @@ const targetFields : any = [
 
 
 const GetAll = async () =>{
-    return await Users.find()
+    return await Users.find({
+        select:targetFields
+    })
 
 } 
 

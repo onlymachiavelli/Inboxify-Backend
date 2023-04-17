@@ -5,7 +5,7 @@ import { log } from 'console'
 const GenerateAPIKey :any = async () =>{
     
     //generate 
-    const apikey = crypto.randomBytes(20).toString('hex')
+    const apikey = await crypto.randomBytes(20).toString('hex')
     console.log(apikey)
     
 

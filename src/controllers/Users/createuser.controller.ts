@@ -24,7 +24,7 @@ const createUser : EXPRESS.RequestHandler = async (req, res) =>{
     user.bday = Body.bday
     user.photo = Body.photo
     user.bday = Body.bday
-    const today : any = date.format(new Date,  'YYYY/MM/DD HH:mm:ss')
+    const today : any = date.format(new Date,  'YYYY-MM-DD HH:mm:ss')
     user.createdat = today 
 
     user.updatedat = today
@@ -36,7 +36,7 @@ const createUser : EXPRESS.RequestHandler = async (req, res) =>{
     //user.apikey_last_used = new Date()
 
     user.verified = false
-    user.apikey = GenerateAPIKey()
+    user.apikey = await GenerateAPIKey()
     const saltRound: number = Number(process.env.SALT)
     user.password = await bcrypt
       .genSalt(saltRound)
@@ -47,6 +47,7 @@ const createUser : EXPRESS.RequestHandler = async (req, res) =>{
         res.status(200).send("User created")
     }).catch(e=>{
         res.status(500).send("Server error")
+        console.log(e)
     })
 }
 
