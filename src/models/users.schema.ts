@@ -1,5 +1,5 @@
 import * as TypeORM from 'typeorm'
-
+import Cluster from './Cluster.entity'
 
 @TypeORM.Entity()
 class Users extends TypeORM.BaseEntity{
@@ -53,6 +53,10 @@ class Users extends TypeORM.BaseEntity{
 
     @TypeORM.Column({ default : null })
     updatedat : Date
+
+    
+    @TypeORM.ManyToMany(type => Cluster, cluster => cluster.users)
+    clusters : Cluster[]
 
 
 }
